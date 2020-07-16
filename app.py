@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, url_for, redirect
-
+import time
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
@@ -21,10 +21,12 @@ def index():
         	return jsonify({"message": "Something is wrong"}), 403
 
         #print(csv_3.read())
+        time.sleep(1)
+
+        filenames = ["file1.csv", "file2.csv"]
+        filelinks = ["http://file1.csv", "http://file2.csv"]
+        filesize = ["20 MB", "25 MB"]
+
+        return jsonify({"filenames": filenames, "filesize": filesize, "filelinks": filelinks}), 200
 
     return render_template("index.html", title="Home"), 200
-
-@app.route("/result")
-def result():
-
-    return render_template("result.html", title="Result")
