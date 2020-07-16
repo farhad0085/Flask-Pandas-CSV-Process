@@ -22,9 +22,9 @@ body {
 }
 
 .navbar-brand {
-    font-weight: 600;
-    font-family: "Open Sans";
-    font-size: 30px !important;
+    font-weight: bold;
+    font-size: 26px !important;
+    font-family: "Times new roman";
     color: #f5f2f9 !important;
 }
 

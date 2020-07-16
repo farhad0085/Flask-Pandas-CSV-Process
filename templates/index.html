@@ -1,36 +1,99 @@
 {% extends 'layout.html' %}
 {% block content %}
-
-<div id="FileUpload">
-    <div class="wrapper">
-        <div class="upload">
-            <p>Drag files here or <span class="upload__button">Browse</span></p>
-        </div>
-        <div class="uploaded uploaded--one">
-            <i class="fas fa-file-csv"></i>
-            <div class="file">
-                <div class="file__name">
-                    <p>lorem_ipsum.csv</p>
-                    <i class="fa fa-times"></i>
+<form method=POST  enctype=multipart/form-data action="{{ url_for('upload') }}">
+<div class="row">
+    <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+        <div id="FileUpload">
+            <div class="wrapper">
+                <div class="upload">
+                    <p><span class="upload__button" id="select_first">Browse CSV File</span></p>
+                    <input id="file_first" style="display: none" type="file" name="file_1" accept=".csv">
                 </div>
-                <div class="progress">
-                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:100%"></div>
+                <div class="uploaded uploaded--one" style="display: none">
+                    <i class="fas fa-file-csv"></i>
+                    <div class="file">
+                        <div class="file__name">
+                            <p>lorem_ipsum.csv</p>
+                            <i class="fa fa-times"></i>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:0%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="uploaded uploaded--two">
-            <i class="fas fa-file-csv"></i>
-            <div class="file">
-                <div class="file__name">
-                    <p>dolor_sit.csv</p>
-                    <i class="fa fa-times"></i>
+    </div>
+    <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+        <div id="FileUpload">
+            <div class="wrapper">
+                <div class="upload">
+                    <p><span class="upload__button" id="select_second">Browse CSV File</span></p>
+                    <input id="file_second" style="display: none" type="file" name="file_2" accept=".csv">
                 </div>
-                <div class="progress">
-                    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:80%"></div>
+                <div class="uploaded uploaded--two" style="display: none">
+                    <i class="fas fa-file-csv"></i>
+                    <div class="file">
+                        <div class="file__name">
+                            <p>lorem_ipsum.csv</p>
+                            <i class="fa fa-times"></i>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+        <div id="FileUpload">
+            <div class="wrapper">
+                <div class="upload">
+                    <p><span class="upload__button" id="select_third">Browse CSV File</span></p>
+                    <input id="file_third" style="display: none" type="file" name="file_3" accept=".csv">
+                </div>
+                <div class="uploaded uploaded--three" style="display: none">
+                    <i class="fas fa-file-csv"></i>
+                    <div class="file">
+                        <div class="file__name">
+                            <p>lorem_ipsum.csv</p>
+                            <i class="fa fa-times"></i>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:0%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div style="padding: 30px">
+<input type="submit" class="btn btn-success btn-lg btn-block" value="Upload">
+</div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $("#select_first").on('click', function(){
+
+            $("#file_first").click();
+
+        });
+        $("#select_second").on('click', function(){
+
+            $("#file_second").click();
+
+        });
+        $("#select_third").on('click', function(){
+
+            $("#file_third").click();
+
+        });
+
+    });
+</script>
 
 {% endblock %}
