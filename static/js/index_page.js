@@ -102,6 +102,9 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             success: function(responseData) {
+                $('#submitButton').val("Upload");
+                $('#progressBar').css('width', '0%');
+                $('#progressDiv').hide();
                 swal({
                       title: "Success!",
                       text: "Processing Completed, Now you can download your files!",
