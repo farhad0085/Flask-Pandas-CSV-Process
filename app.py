@@ -6,9 +6,21 @@ app = Flask(__name__)
 def index():
 
     if request.method == "POST":
+        
         files = request.files
-        csv_1 = files[0]
-        csv_2 = files[1]
-        csv_3 = files[2]
 
-    return render_template("index.html")
+        csv_1 = files['file_1']
+        csv_2 = files['file_2']
+        csv_3 = files['file_3']
+
+        if csv_1.filename == "" or csv_2.filename == "" or csv_3.filename == "":
+        	return jsonify({"message": "Something is wrong"}), 403
+
+        #print(csv_3.read())
+
+    return render_template("index.html", title="Home")
+
+@app.route("/result")
+def result():
+
+    return render_template("result.html", title="Result")

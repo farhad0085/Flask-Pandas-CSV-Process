@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-<form method=POST  enctype=multipart/form-data action="{{ url_for('upload') }}">
+<form method=POST  enctype=multipart/form-data action="">
 <div class="row">
     <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
         <div id="FileUpload">
@@ -9,14 +9,13 @@
                     <p><span class="upload__button" id="select_first">Browse CSV File</span></p>
                     <input id="file_first" style="display: none" type="file" name="file_1" accept=".csv">
                 </div>
-                <div class="uploaded uploaded--one" style="display: none">
+                <div class="uploaded uploaded--one" id="file_upload_1" style="display: none">
                     <i class="fas fa-file-csv"></i>
                     <div class="file">
                         <div class="file__name">
                             <p>lorem_ipsum.csv</p>
-                            <i class="fa fa-times"></i>
                         </div>
-                        <div class="progress">
+                        <div class="progress" style="display: none">
                             <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:0%"></div>
                         </div>
                     </div>
@@ -31,14 +30,13 @@
                     <p><span class="upload__button" id="select_second">Browse CSV File</span></p>
                     <input id="file_second" style="display: none" type="file" name="file_2" accept=".csv">
                 </div>
-                <div class="uploaded uploaded--two" style="display: none">
+                <div class="uploaded uploaded--two" id="file_upload_2" style="display: none">
                     <i class="fas fa-file-csv"></i>
                     <div class="file">
                         <div class="file__name">
                             <p>lorem_ipsum.csv</p>
-                            <i class="fa fa-times"></i>
                         </div>
-                        <div class="progress">
+                        <div class="progress" style="display: none">
                             <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:0%"></div>
                         </div>
                     </div>
@@ -53,14 +51,13 @@
                     <p><span class="upload__button" id="select_third">Browse CSV File</span></p>
                     <input id="file_third" style="display: none" type="file" name="file_3" accept=".csv">
                 </div>
-                <div class="uploaded uploaded--three" style="display: none">
+                <div class="uploaded uploaded--three" id="file_upload_3" style="display: none">
                     <i class="fas fa-file-csv"></i>
                     <div class="file">
                         <div class="file__name">
                             <p>lorem_ipsum.csv</p>
-                            <i class="fa fa-times"></i>
                         </div>
-                        <div class="progress">
+                        <div class="progress" style="display: none">
                             <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:0%"></div>
                         </div>
                     </div>
@@ -69,9 +66,9 @@
         </div>
     </div>
 </div>
-<div style="padding: 30px">
+
 <input type="submit" class="btn btn-success btn-lg btn-block" value="Upload">
-</div>
+
 </form>
 
 <script type="text/javascript">
@@ -90,6 +87,25 @@
         $("#select_third").on('click', function(){
 
             $("#file_third").click();
+
+        });
+
+
+        $("#file_first").change(function(){
+
+            $("#file_upload_1").show();
+
+        });
+
+        $("#file_second").change(function(){
+
+            $("#file_upload_2").show();
+
+        });
+
+        $("#file_third").change(function(){
+
+            $("#file_upload_3").show();
 
         });
 
