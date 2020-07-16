@@ -1,115 +1,175 @@
 {% extends 'layout.html' %}
 {% block content %}
-<form method=POST  enctype=multipart/form-data action="">
-<div class="row">
-    <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
-        <div id="FileUpload">
-            <div class="wrapper">
-                <div class="upload">
-                    <p><span class="upload__button" id="select_first">Browse CSV File</span></p>
-                    <input id="file_first" style="display: none" type="file" name="file_1" accept=".csv">
-                </div>
-                <div class="uploaded uploaded--one" id="file_upload_1" style="display: none">
-                    <i class="fas fa-file-csv"></i>
-                    <div class="file">
-                        <div class="file__name">
-                            <p>lorem_ipsum.csv</p>
+<form class="mb-5" method=POST enctype=multipart/form-data action="">
+    <div class="row">
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+            <div id="FileUpload">
+                <div class="wrapper">
+                    <div class="upload">
+                        <p><span class="upload__button" id="select_first">Browse CSV File</span></p>
+                        <input id="file_first" style="display: none" type="file" name="file_1" accept=".csv">
+                    </div>
+                    <div class="uploaded uploaded--one" id="file_upload_1" style="display: none">
+                        <i class="fas fa-file-csv"></i>
+                        <div class="file">
+                            <div class="file__name">
+                                <p id="filename_1">lorem_ipsum.csv</p>
+                            </div>
+                            <div id="filesize_div_1">
+                                
+                            </div>
                         </div>
-                        <div class="progress" style="display: none">
-                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+            <div id="FileUpload">
+                <div class="wrapper">
+                    <div class="upload">
+                        <p><span class="upload__button" id="select_second">Browse CSV File</span></p>
+                        <input id="file_second" style="display: none" type="file" name="file_2" accept=".csv">
+                    </div>
+                    <div class="uploaded uploaded--two" id="file_upload_2" style="display: none">
+                        <i class="fas fa-file-csv"></i>
+                        <div class="file">
+                            <div class="file__name">
+                                <p id="filename_2">lorem_ipsum.csv</p>
+                            </div>
+                            <div id="filesize_div_2">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+            <div id="FileUpload">
+                <div class="wrapper">
+                    <div class="upload">
+                        <p><span class="upload__button" id="select_third">Browse CSV File</span></p>
+                        <input id="file_third" style="display: none" type="file" name="file_3" accept=".csv">
+                    </div>
+                    <div class="uploaded uploaded--three" id="file_upload_3" style="display: none">
+                        <i class="fas fa-file-csv"></i>
+                        <div class="file">
+                            <div class="file__name">
+                                <p id="filename_3">lorem_ipsum.csv</p>
+                            </div>
+                            <div id="filesize_div_3">
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
-        <div id="FileUpload">
-            <div class="wrapper">
-                <div class="upload">
-                    <p><span class="upload__button" id="select_second">Browse CSV File</span></p>
-                    <input id="file_second" style="display: none" type="file" name="file_2" accept=".csv">
-                </div>
-                <div class="uploaded uploaded--two" id="file_upload_2" style="display: none">
-                    <i class="fas fa-file-csv"></i>
-                    <div class="file">
-                        <div class="file__name">
-                            <p>lorem_ipsum.csv</p>
-                        </div>
-                        <div class="progress" style="display: none">
-                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:0%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="progress mb-3" id="progressDiv" style="display: none">
+        <div id="progressBar" class="progress-bar bg-success progress-bar-animated" style="width:0%"></div>
     </div>
-    <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
-        <div id="FileUpload">
-            <div class="wrapper">
-                <div class="upload">
-                    <p><span class="upload__button" id="select_third">Browse CSV File</span></p>
-                    <input id="file_third" style="display: none" type="file" name="file_3" accept=".csv">
-                </div>
-                <div class="uploaded uploaded--three" id="file_upload_3" style="display: none">
-                    <i class="fas fa-file-csv"></i>
-                    <div class="file">
-                        <div class="file__name">
-                            <p>lorem_ipsum.csv</p>
-                        </div>
-                        <div class="progress" style="display: none">
-                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:0%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<input type="submit" class="btn btn-success btn-lg btn-block" value="Upload">
-
+    <input type="submit" class="btn btn-success btn-lg btn-block" value="Upload">
 </form>
-
+{% endblock %}
+{% block footer %}
 <script type="text/javascript">
-    $(document).ready(function(){
+$(document).ready(function() {
 
-        $("#select_first").on('click', function(){
+    $("#select_first").on('click', function() {
 
-            $("#file_first").click();
+        $("#file_first").click();
 
-        });
-        $("#select_second").on('click', function(){
+    });
+    $("#select_second").on('click', function() {
 
-            $("#file_second").click();
+        $("#file_second").click();
 
-        });
-        $("#select_third").on('click', function(){
+    });
+    $("#select_third").on('click', function() {
 
-            $("#file_third").click();
+        $("#file_third").click();
 
-        });
+    });
 
 
-        $("#file_first").change(function(){
+    $("#file_first").change(function(event) {
 
-            $("#file_upload_1").show();
+        $("#file_upload_1").show();
+        $("#filename_1").text(event.target.files[0].name);
+        $("#filesize_div_1").text(event.target.files[0].name);
 
-        });
+    });
 
-        $("#file_second").change(function(){
+    $("#file_second").change(function() {
 
-            $("#file_upload_2").show();
+        $("#file_upload_2").show();
+        $("#filename_2").text(event.target.files[0].name);
+        $("#filesize_div_2").text(event.target.files[0].name);
 
-        });
+    });
 
-        $("#file_third").change(function(){
+    $("#file_third").change(function() {
 
-            $("#file_upload_3").show();
+        $("#file_upload_3").show();
+        $("#filename_3").text(event.target.files[0].name);
+        $("#filesize_div_3").text(event.target.files[0].name);
 
+    });
+
+
+    // form submit
+
+    $('form').on('submit', function(event) {
+
+        event.preventDefault();
+
+        var formData = new FormData($('form')[0]);
+
+        $.ajax({
+            xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+
+                xhr.upload.addEventListener('progress', function(e) {
+
+                    console.log(e);
+
+                    if (e.lengthComputable) {
+
+                        console.log('Bytes Loaded: ' + e.loaded);
+                        console.log('Total Size: ' + e.total);
+                        console.log('Percentage Uploaded: ' + (e.loaded / e.total))
+
+                        var percent = Math.round((e.loaded / e.total) * 100);
+
+                        $('#progressDiv').show();
+                        $('#progressBar').css('width', percent + '%');
+
+                    }
+
+                });
+
+                return xhr;
+            },
+            type: 'POST',
+            url: '/',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function() {
+                swal({
+                      title: "Success!",
+                      text: "File Uploaded Successfully!",
+                      icon: "success",
+                      button: "Okay",
+                    }).then(function() {
+                            window.location.reload(false);
+                        });
+            }
         });
 
     });
-</script>
 
+});
+</script>
 {% endblock %}
