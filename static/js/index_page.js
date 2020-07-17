@@ -20,7 +20,7 @@ $(document).ready(function() {
     $("#file_first").change(function(event) {
 
         $("#file_upload_1").show();
-        $("#filename_1").text(event.target.files[0].name);
+        $("#filename_1").text(event.target.files[0].name.slice(0,25));
         $("#filesize_div_1").text((event.target.files[0].size/(1000*1000)).toFixed(2) + " MB");
 
     });
@@ -28,7 +28,7 @@ $(document).ready(function() {
     $("#file_second").change(function() {
 
         $("#file_upload_2").show();
-        $("#filename_2").text(event.target.files[0].name);
+        $("#filename_2").text(event.target.files[0].name.slice(0,25));
         $("#filesize_div_2").text((event.target.files[0].size/(1000*1000)).toFixed(2) + " MB");
 
     });
@@ -36,7 +36,7 @@ $(document).ready(function() {
     $("#file_third").change(function() {
 
         $("#file_upload_3").show();
-        $("#filename_3").text(event.target.files[0].name);
+        $("#filename_3").text(event.target.files[0].name.slice(0,25));
         $("#filesize_div_3").text((event.target.files[0].size/(1000*1000)).toFixed(2) + " MB");
 
     });
@@ -127,7 +127,21 @@ $(document).ready(function() {
                                     scrollTop: $("#file_downloads").offset().top
                                 }, 2000);
                         });
-            }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+		        $('#submitButton').val("Upload");
+                $('#progressBar').css('width', '0%');
+                $('#progressDiv').hide();
+                swal({
+                      title: "Failed!",
+                      text: "Error: Please double check that either you have uploaded right csv or use right sequence!",
+                      icon: "error",
+                      button: "Okay",
+                    }).then(function() {
+                            $("#loading_spinner").hide();
+                            $("#loading_msg").hide();
+                        });
+		    }  
         });
 
     });

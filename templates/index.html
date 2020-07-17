@@ -1,5 +1,14 @@
 {% extends 'layout.html' %}
 {% block content %}
+<h3 class="d-flex justify-content-center">You must upload file in this sequence</h3>
+<div class="d-flex justify-content-center">
+    <ol>
+        <li><b>SurveySection-Question-MAItem.csv</b></li>
+        <li><b>WrittenSummary-Quote.csv</b></li>
+        <li><b>Response.csv</b></li>
+    </ol>
+</div>
+
 <form class="mb-5" method=POST enctype=multipart/form-data action="">
     <div class="row">
         <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
