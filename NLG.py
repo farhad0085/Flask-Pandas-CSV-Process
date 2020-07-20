@@ -517,4 +517,5 @@ def csv_processing(file1 ='SurveySection-Question-MAItem.csv',file2='WrittenSumm
     df5['order'] =order1
     df5['orderinsidesurvey'] =order2
     df5 = df5.dropna()
+    df5['text'] = df5['text'].str.replace('"','')
     return df5, results2
