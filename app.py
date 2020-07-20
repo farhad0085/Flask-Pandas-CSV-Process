@@ -3,6 +3,7 @@ import io, os
 from NLG import csv_processing
 from time import time
 from glob import glob
+from google_drive import upload_file
 
 app = Flask(__name__)
 
@@ -52,6 +53,12 @@ def index():
 
             filesize_1 = str(round(filesize_1/1024, 2)) + " KB"
             filesize_2 = str(round(filesize_2/1024, 2)) + " KB"
+
+            outputs = [os.path.join(app.root_path, 'static/csv', "NLGdata-"+time_now+".csv"),
+                       os.path.join(app.root_path, 'static/csv', "Chartsdata-"+time_now+".csv")]
+
+            drive_links = upload_file(outputs)
+
         except:
             return jsonify({"message" : "error"}), 401
 
@@ -59,6 +66,6 @@ def index():
         filelinks = [url_for('static', filename='csv/NLGdata-'+time_now+'.csv'), url_for('static', filename='csv/Chartsdata-'+time_now+'.csv'),]
         filesize = [filesize_1, filesize_2]
 
-        return jsonify({"filenames": filenames, "filesize": filesize, "filelinks": filelinks}), 200
+        return jsonify({"filenames": filenames, "filesize": filesize, "filelinks": filelinks, "drive_links": drive_links}), 200
 
     return render_template("index.html", title="Home"), 200

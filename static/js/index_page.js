@@ -46,6 +46,7 @@ $(document).ready(function() {
 
     $('form').on('submit', function(event) {
         $("#file_downloads").hide();
+        $("#drive_links").attr('style', 'display: none !important');
 
         event.preventDefault();
 
@@ -115,6 +116,12 @@ $(document).ready(function() {
                             $("#loading_msg").hide();
 
                             // set received file infos
+                            $("#drive_link_1").attr('href', "https://drive.google.com/open?id="+responseData.drive_links[0])
+                            $("#drive_link_2").attr('href', "https://drive.google.com/open?id="+responseData.drive_links[1])
+                            $("#drive_link_1").text("https://drive.google.com/open?id="+responseData.drive_links[0])
+                            $("#drive_link_2").text("https://drive.google.com/open?id="+responseData.drive_links[1])
+                            $("#drive_links").show()
+
                             $("#filename_1_down").text(responseData.filenames[0])
                             $("#filename_2_down").text(responseData.filenames[1])
                             $("#filesize_div_1_down").text(responseData.filesize[0])
