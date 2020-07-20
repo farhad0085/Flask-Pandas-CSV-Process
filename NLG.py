@@ -1,8 +1,3 @@
-
-# coding: utf-8
-
-# In[1]:
-
 def Select_top_category_of_chart(df, qid):
     df1 =  df[df.questionid == qid].sort_values(by ='count',ascending=False).reset_index()
     return df1['ResponseValue'][0]
@@ -518,8 +513,3 @@ def csv_processing(file1 ='SurveySection-Question-MAItem.csv',file2='WrittenSumm
     df5 = df5.dropna()
     df5['text'] = df5['text'].str.replace('"','')   
     return df5, results2
-
-r, r2 = csv_processing()
-
-r.to_csv("result.csv")
-r2.to_csv("result2.csv")
