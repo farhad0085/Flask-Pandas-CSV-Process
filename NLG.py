@@ -14,7 +14,7 @@ def percentage_value_of_top_category(df, qid):
             v= int(round(df1['%'][0]*100))
         else:
             v =df1['%'][0]*100
-        return v
+        return (str(v)+'%')
 
 
 def count_top_category(df, qid):
@@ -40,7 +40,7 @@ def percentage_value_of_2nd_top_category(df, qid):
             v= int(round(df1['%'][1]*100))
         else:
             v =df1['%'][1]*100
-        return v
+        return (str(v) +'%')
 
 def count_2nd_top_category(df, qid):
     df1 =  df[df.questionid == qid].sort_values(by ='count',ascending=False).reset_index()
@@ -60,7 +60,7 @@ def percentage_value_of_2nd_bottom_category(df, qid):
             v= int(round(df1['%'][1]*100))
         else:
             v =df1['%'][1]*100
-        return v
+        return (str(v)+'%')
 
 
 def count_2nd_bottom_category(df, qid):
@@ -80,7 +80,7 @@ def percentage_value_of_bottom_category(df, qid):
             v= int(round(df1['%'][0]*100))
         else:
             v =df1['%'][0]*100
-        return v
+        return (str(v) +'%')
 
 def count_bottom_category(df, qid):
     df1 =  df[df.questionid == qid].sort_values(by ='count',ascending=True).reset_index()
@@ -101,7 +101,7 @@ def Calculate_weighted_average(df,qid):
 
 def percentage_value_8_9_10_category(df,qid):
     sum = df[(df.questionid==qid) & (df.ResponseValue =='8')]['%'].values[0] +df[(df.questionid==qid) & (df.ResponseValue =='9')]['%'].values[0] +df[(df.questionid==qid) & (df.ResponseValue =='10')]['%'].values[0]
-    return int(sum*100)
+    return (str(int(sum*100))+'%')
 
 
 
@@ -112,7 +112,7 @@ def count_value_8_9_10_category(df,qid):
 def percentage_value_of_1_2_3_4_category(df,qid):
     try:
         sum = df[(df.questionid==qid) & (df.ResponseValue =='1')]['%'].values[0] +df[(df.questionid==qid) & (df.ResponseValue =='2')]['%'].values[0] +df[(df.questionid==qid) & (df.ResponseValue =='3')]['%'].values[0] +df[(df.questionid==qid) & (df.ResponseValue =='4')]['%'].values[0]
-        return int(sum*100)
+        return (str(int(sum*100)) +'%')
     except IndexError as ie:
         return 'missing'
 
@@ -126,7 +126,7 @@ def count_value_of_1_2_3_4_category(df,qid):
 
 def percentage_value_of_Somewhat_unlikely_Very_unlikely_categories(df,qid):
     sum = df[(df.questionid==qid) & (df.ResponseValue =='Somewhat unlikely')]['%'].values[0]+df[(df.questionid==qid) & (df.ResponseValue =='Very unlikely')]['%'].values[0]
-    return int(sum*100)
+    return (str(int(sum*100)) +'%')
 
 
 def count_value_of_Somewhat_unlikely_Very_unlikely_categories(df,qid):
@@ -136,7 +136,7 @@ def count_value_of_Somewhat_unlikely_Very_unlikely_categories(df,qid):
 
 def percentage_value_of_Somewhat_likely_Very_likely_categories(df,qid):
     sum = df[(df.questionid==qid) & (df.ResponseValue =='Somewhat likely')]['%'].values[0]+df[(df.questionid==qid) & (df.ResponseValue =='Very likely')]['%'].values[0]
-    return int(sum*100)
+    return (str(int(sum*100))+'%')
 
 
 def count_value_of_Somewhat_likely_Very_likely_categories(df,qid):
@@ -145,7 +145,7 @@ def count_value_of_Somewhat_likely_Very_likely_categories(df,qid):
 
 
 def percentage_value_of_I_dont_know_category(df,qid):
-    return int(df[(df.questionid==qid) & (df.ResponseValue =="I don't know")]['%'].values[0]*100)
+    return (str(int(df[(df.questionid==qid) & (df.ResponseValue =="I don't know")]['%'].values[0]*100)) +'%')
 
 
 def count_value_of_I_dont_know_category(df,qid):
@@ -158,11 +158,11 @@ def count_value_of_No_category(df,qid):
 
 
 def percentage_value_of_No_category(df,qid):
-    return int(df[(df.questionid==qid) & (df.ResponseValue =="No")]['%'].values[0]*100)
+    return (str(int(df[(df.questionid==qid) & (df.ResponseValue =="No")]['%'].values[0]*100)) + '%')
 
 
 def percentage_value_of_Yes_category(df,qid):
-    return int(df[(df.questionid==qid) & (df.ResponseValue =="Yes")]['%'].values[0]*100)
+    return (str(int(df[(df.questionid==qid) & (df.ResponseValue =="Yes")]['%'].values[0]*100)) +'%')
 
 def count_value_of_Yes_category(df,qid):
     return int(df[(df.questionid==qid) & (df.ResponseValue =="Yes")]['count'].values[0])
@@ -170,7 +170,7 @@ def count_value_of_Yes_category(df,qid):
 
 def percentage_value_of_no_input_in_the_process_category(df,qid):
     try:
-        return int(df[(df.questionid==qid) & (df.ResponseValue =="no input in the process")]['%'].values[0]*100)
+        return (str(int(df[(df.questionid==qid) & (df.ResponseValue =="no input in the process")]['%'].values[0]*100)) +'%')
     except IndexError as ie:
         return 'missing'
 
@@ -188,7 +188,7 @@ def percentage_value_of_top_category_no_input(df, qid):
             v= int(round(df1['%'][1]*100))
         else:
             v =df1['%'][1]*100
-        return v
+        return (str(v) +'%')
 
 
 def count_top_category_no_input(df, qid):
@@ -217,8 +217,7 @@ def count_2nd_top_category_no_input(df, qid):
 
 def percentage_2nd_top_category_no_input(df, qid):
     df1 =  df[(df.questionid == qid) & (df.ResponseValue !='no input in process')].sort_values(by ='count',ascending=False).reset_index()
-    return df1['%'][1]
-
+    return (str(df1['%'][1])+'%')
 
 def csv_processing(file1 ='SurveySection-Question-MAItem.csv',file2='WrittenSummary-Quote.csv',file3='Response.csv' ):
 
@@ -517,4 +516,10 @@ def csv_processing(file1 ='SurveySection-Question-MAItem.csv',file2='WrittenSumm
     df5['order'] =order1
     df5['orderinsidesurvey'] =order2
     df5 = df5.dropna()
+    df5['text'] = df5['text'].str.replace('"','')   
     return df5, results2
+
+r, r2 = csv_processing()
+
+r.to_csv("result.csv")
+r2.to_csv("result2.csv")
