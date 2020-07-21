@@ -503,13 +503,22 @@ def csv_processing(file1 ='SurveySection-Question-MAItem.csv',file2='WrittenSumm
         order2.append(final1['orderinsidesurvey'][(final1['questionid']==i)].to_list()[0])
         QuestionId.append(i)
     df5 = pd.DataFrame()
-    df5['QuestionId'] =QuestionId
+    df5['questionId'] =QuestionId
     df5['text'] =text
-    #df1['chartHeading'] = chartHeading
+    new_text = []
+    for i in df5['text']:
+        new_text.append('.'.join(i.split('.')[0:-1]))
+    
+    df5['text'] = new_text
     df5['MainHeading'] = MainHeading
     df5['orderinsidesurveysection'] =order
-    df5['order'] =order1
+    df5['order'] =df5.index.to_list()
     df5['orderinsidesurvey'] =order2
     df5 = df5.dropna()
-    df5['text'] = df5['text'].str.replace('"','')   
-    return df5, results2
+    df5['text'] = df5['text'].str.replace('"','')
+    unique_order = df5[['questionId','order']].copy()
+    uo = unique_order.set_index('questionId')
+    uo_dict = uo.to_dict()
+    results2['order'] = results2['questionid']
+    results2 =results2.replace({"order": uo_dict['order']})
+    return df5, results2    

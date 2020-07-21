@@ -45,8 +45,8 @@ def index():
 
         try:
             output_csv_1, output_csv_2 = csv_processing(csv_1, csv_2, csv_3)
-            output_csv_1.to_csv(os.path.join(app.root_path, 'static/csv', "NLGdata-"+time_now+".csv"))
-            output_csv_2.to_csv(os.path.join(app.root_path, 'static/csv', "Chartsdata-"+time_now+".csv"))
+            output_csv_1.to_csv(os.path.join(app.root_path, 'static/csv', "NLGdata-"+time_now+".csv"),index =False)
+            output_csv_2.to_csv(os.path.join(app.root_path, 'static/csv', "Chartsdata-"+time_now+".csv"),index =False)
             
             filesize_1 = os.path.getsize(os.path.join(app.root_path, 'static/csv', "NLGdata-"+time_now+".csv"))
             filesize_2 = os.path.getsize(os.path.join(app.root_path, 'static/csv', "Chartsdata-"+time_now+".csv"))
