@@ -61,7 +61,7 @@ def index():
         outputs = [os.path.join(app.root_path, 'static/csv', "NLGdata-"+time_now+".csv"),
                        os.path.join(app.root_path, 'static/csv', "Chartsdata-"+time_now+".csv")]
 
-		drive_links = upload_file(outputs)
+        drive_links = upload_file(outputs)
 
         filenames = ["NLGdata-"+time_now+".csv", "Chartsdata-"+time_now+".csv"]
         filelinks = [url_for('static', filename='csv/NLGdata-'+time_now+'.csv'), url_for('static', filename='csv/Chartsdata-'+time_now+'.csv'),]
