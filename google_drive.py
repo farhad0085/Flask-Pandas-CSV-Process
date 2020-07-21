@@ -13,7 +13,7 @@ def upload_file(files):
         creds = tools.run_flow(flow, store)
     DRIVE = discovery.build('drive', 'v3', http=creds.authorize(Http()))
 
-    folder_id = "1SZ1KQe0_yW1kpB_UzyxOQy2-DI9y3wNt"
+    folder_id = "1KOH4_ddjwtWJcNDO8HXtxyrjXuOMgI4U"  # change this id
 
     result_ids = []
 
@@ -29,3 +29,6 @@ def upload_file(files):
         result_ids.append(res.get('id'))
 
     return result_ids
+
+if __name__ == "__main__":
+    upload_file(['NLG.py']) # you don't need to follow this.
