@@ -6,10 +6,10 @@ import os
 def upload_file(files):
     from oauth2client import file
     SCOPES = 'https://www.googleapis.com/auth/drive'
-    store = file.Storage('token.json')
+    store = file.Storage(os.path.dirname(os.path.realpath(__file__))+'/token.json')
     creds = store.get()
     if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets('client_secrets.json', SCOPES)
+        flow = client.flow_from_clientsecrets(os.path.dirname(os.path.realpath(__file__))+'/client_secrets.json', SCOPES)
         creds = tools.run_flow(flow, store)
     DRIVE = discovery.build('drive', 'v3', http=creds.authorize(Http()))
 
