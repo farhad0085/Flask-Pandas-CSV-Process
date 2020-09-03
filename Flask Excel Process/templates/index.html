@@ -1,0 +1,187 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<div class="container col-md-6 offset-md-3 mt-5 mb-5">
+
+    <form class="mb-5" method=POST enctype=multipart/form-data action="">
+        <div class="mx-auto">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div id="FileUpload">
+                        <div class="wrapper">
+                            <div class="upload">
+                                <p><span class="upload__button" id="select_first">Browse CSV File</span></p>
+                                <input id="file_first" style="display: none" type="file" name="file_1">
+                            </div>
+                            <div class="uploaded uploaded--one" id="file_upload_1" style="display: none">
+                                <i class="fas fa-file-excel"></i>
+                                <div class="file">
+                                    <div class="file__name">
+                                        <p id="filename_1">lorem_ipsum.csv</p>
+                                    </div>
+                                    <div id="filesize_div_1">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="progress mb-3" id="progressDiv" style="display: none; height: 30px;">
+            <div id="progressBar" class="progress-bar bg-success progress-bar-animated" style="width:0%"></div>
+        </div>
+        <input type="submit" class="btn btn-success btn-lg btn-block submit-btn" id="submitButton" value="Upload">
+    </form>
+
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border text-success mb-4" id="loading_spinner"
+            style="width: 6rem; height: 6rem; display: none;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div class="text-center mb-4" id="loading_msg" style="display: none; font-size: 18px;">
+        Hang on, while we process your files...
+    </div>
+
+    <table id="dataTable" style="display: none; background: white; opacity: 0.9;"
+        class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Open Ended Questions</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block footer %}
+<!-- <script src="{{ url_for('static', filename='js/index_page.js') }}"></script> -->
+<script>
+    $(document).ready(function () {
+
+        $("#select_first").on('click', function () {
+            $("#file_first").click();
+        });
+
+        $("#file_first").change(function (event) {
+            $("#dataTable").hide();
+            $("#file_upload_1").show();
+            $("#filename_1").text(event.target.files[0].name.slice(0, 25));
+            $("#filesize_div_1").text((event.target.files[0].size / (1000 * 1000)).toFixed(2) + " MB");
+
+        });
+
+        // form submit
+
+        $('form').on('submit', function (event) {
+            event.preventDefault();
+            $("#dataTable").hide();
+            if ($("#file_first").get(0).files.length === 0) {
+
+                swal({
+                    title: "Warning!",
+                    text: "Please select an excel file!",
+                    icon: "warning",
+                    button: "Okay",
+                })
+                return false;
+            }
+
+            var formData = new FormData($('form')[0]);
+
+            $.ajax({
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+
+                    xhr.upload.addEventListener('progress', function (e) {
+
+                        if (e.lengthComputable) {
+
+                            console.log('Bytes Loaded: ' + e.loaded);
+                            console.log('Total Size: ' + e.total);
+                            console.log('Percentage Uploaded: ' + (e.loaded / e.total))
+
+                            var percent = Math.round((e.loaded / e.total) * 100);
+
+                            $('#progressDiv').show();
+                            $('#progressBar').css('width', percent + '%');
+                            $('#submitButton').val("Uploading ...");
+
+                            if (percent == 100) {
+                                $('#submitButton').val("File Uploaded");
+                                $("#loading_spinner").show();
+                                $("#loading_msg").show();
+                                $('html, body').animate({
+                                    scrollTop: $("#loading_spinner").offset().top
+                                }, 2000);
+                            }
+                        }
+
+                    });
+
+                    return xhr;
+                },
+                type: 'POST',
+                url: '/',
+                data: formData,
+                processData: false,
+                contentType: false,
+
+                success: function (responseData) {
+                    $('#submitButton').val("Upload");
+                    $('#progressBar').css('width', '0%');
+                    $('#progressDiv').hide();
+                    swal({
+                        title: "Success!",
+                        text: "Processing Completed!",
+                        icon: "success",
+                        button: "Okay",
+                    }).then(function () {
+                        $("#loading_spinner").hide();
+                        $("#loading_msg").hide();
+                        $("#dataTable").show();
+
+                        const responseLength = responseData[1]
+                        const open_ended_questions = responseData[0]['Open Ended Questions']
+                        
+                        var trs = ""
+
+                        for(var i=0; i<responseLength; i++){
+                            trs += `<tr><td>${i}</td><td>${open_ended_questions[i]}</td></tr>`
+                        }
+
+                        $("#tbody").html(trs)
+
+                        $('html, body').animate({
+                            scrollTop: $("#dataTable").offset().top
+                        }, 2000);
+                    });
+                },
+
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $('#submitButton').val("Upload");
+                    $('#progressBar').css('width', '0%');
+                    $('#progressDiv').hide();
+                    swal({
+                        title: "Failed!",
+                        text: "Error: Please check if you uploaded a valid excel file!",
+                        icon: "error",
+                        button: "Okay",
+                    }).then(function () {
+                        $("#loading_spinner").hide();
+                        $("#loading_msg").hide();
+                    });
+                }
+
+            });
+
+        });
+
+    });
+</script>
+{% endblock %}
