@@ -48,6 +48,10 @@ body {
     width: 100%;
 }
 
+.is-dragover{
+    opacity: 0.8;
+}
+
 /* === Upload Box === */
 .upload {
     margin: 10px;
@@ -124,4 +128,10 @@ body {
 
 table#dataTable{
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+@media only screen and (max-width: 767px) {
+    .upload__button {
+        padding: 20px 20px 20px 20px;
+    }
 }

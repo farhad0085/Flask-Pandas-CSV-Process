@@ -10,7 +10,7 @@
                     <div id="FileUpload">
                         <div class="wrapper">
                             <div class="upload">
-                                <p><span class="upload__button" id="select_first">Browse CSV File</span></p>
+                                <p><span class="upload__button" id="select_first">Browse or Drag & Drop file</span></p>
                                 <input id="file_first" style="display: none" type="file" name="file_1">
                             </div>
                             <div class="uploaded uploaded--one" id="file_upload_1" style="display: none">
@@ -64,16 +64,38 @@
 <script>
     $(document).ready(function () {
 
+        var droppedFiles = false;
+
+        $('form').on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        })
+        .on('dragover dragenter', function() {
+            $('form').addClass('is-dragover');
+        })
+        .on('dragleave dragend drop', function() {
+            $('form').removeClass('is-dragover');
+        })
+        .on('drop', function(e) {
+            droppedFiles = e.originalEvent.dataTransfer.files;
+            $('form').find('input[type="file"]').prop('files', droppedFiles);
+
+            $("#filename_1").text(droppedFiles[0].name.slice(0, 25));
+            $("#filesize_div_1").text((droppedFiles[0].size / (1000 * 1000)).toFixed(2) + " MB");
+
+            $('#file_upload_1').show();
+        });
+
         $("#select_first").on('click', function () {
             $("#file_first").click();
         });
 
         $("#file_first").change(function (event) {
             $("#dataTable").hide();
-            $('#file_upload_1').show();
             $("#filename_1").text(event.target.files[0].name.slice(0, 25));
             $("#filesize_div_1").text((event.target.files[0].size / (1000 * 1000)).toFixed(2) + " MB");
 
+            $('#file_upload_1').show();
         });
 
         // form submit
