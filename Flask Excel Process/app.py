@@ -23,7 +23,6 @@ def index():
 
             response_length = len(response_back['Open Ended Questions'])
 
-            print(response_back)
             return jsonify(response_back, response_length)
 
     return render_template('index.html')
