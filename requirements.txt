@@ -36,5 +36,5 @@ rsa==4.7
 six==1.15.0
 tlslite-ng==0.7.6
 uritemplate==3.0.1
-urllib3==1.25.9
+urllib3==1.26.5
 Werkzeug==1.0.1
